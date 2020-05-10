@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./style.css"/>
+    <script src="./scripts.js"></script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header class="jumbotron">
+        <h1 class="display-3">Weather Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <div class="row my-0 mx-0">
+            <div class="col-3">
+                <div class="card bg-light">
+                    <div class="card-block">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder=" City Name" id="srchCity">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="srchBtn">search</button>
+                            </div>
+
+                        </div>
+
+                        <!-- <input class="form-control" type="text" placeholder="enter city" id="srchCity"> -->
+                        <ul class="list-group">
+                            <li class="list-group-item" id="city1"></li>
+                            <li class="list-group-item" id="city2"></li>
+                            <li class="list-group-item" id="city3"></li>
+                            <li class="list-group-item" id="city4"></li>
+                            <li class="list-group-item" id="city5"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card bg-light">
+                    <div class="card-block ml-4">
+                        <h3 class="card-text" id="city">San Diego (5/9/20)</h3>
+                        <p class="card-text" id="temp">temp: 72F</p>
+                        <p class="card-text" id="humidity">humidity: 65%</p>
+                        <p class="card-text" id="windspeed">windspeed: 7 mph<p>
+                                <p class="card-text" id="uvindex">UV Index: 0</p>
+                    </div>
+                </div>
+                <div class="row py-0">
+                    <div class="col ml-2">
+                        <h2>5 Day Forecast</h2>
+                    </div>
+                </div>
+                <div class="row my-0 mx-0">
+                    <div class="col px-md-1">
+                        <div class="card bg-primary text-white" style="max-height: 200px; max-width: 150px">
+                            <div class="card-body py-0">
+                                <p class="card-text" id="temp">date</p>
+                                <p class="card-text" id="humidity">icon</p>
+                                <p class="card-text" id="windspeed">temp</p>
+                                <p class="card-text" id="uvindex">humidity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-md-1">
+                        <div class="card bg-primary text-white" style="max-height: 200px; max-width: 150px">
+                            <div class="card-body py-0">
+                                <p class="card-text" id="temp">date</p>
+                                <p class="card-text" id="humidity">icon</p>
+                                <p class="card-text" id="windspeed">temp</p>
+                                <p class="card-text" id="uvindex">humidity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-md-1">
+                        <div class="card bg-primary text-white" style="max-height: 200px; max-width: 150px;">
+                            <div class="card-body py-0">
+                                <p class="card-text" id="temp">date</p>
+                                <p class="card-text" id="humidity">icon</p>
+                                <p class="card-text" id="windspeed">temp</p>
+                                <p class="card-text" id="uvindex">humidity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-md-1">
+                        <div class="card bg-primary text-white" style="max-height: 200px; max-width: 150px">
+                            <div class="card-body py-0">
+                                <p class="card-text" id="temp">date</p>
+                                <p class="card-text" id="humidity">icon</p>
+                                <p class="card-text" id="windspeed">temp</p>
+                                <p class="card-text" id="uvindex">humidity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-md-1">
+                        <div class="card bg-primary text-white" style="max-height: 200px; max-width: 150px">
+                            <div class="card-body py-0">
+                                <p class="card-text" id="temp">date</p>
+                                <p class="card-text" id="humidity">icon</p>
+                                <p class="card-text" id="windspeed">temp</p>
+                                <p class="card-text" id="uvindex">humidity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            var APIKey = "8522788feb48b4797ad60e7823e7392b"
+            queryURL =
+                "https://api.openweathermap.org/data/2.5/weather?q=houston&appid=8522788feb48b4797ad60e7823e7392b"
+
+
+
+            //display the current day in the header
+            var currentDayEl = $("#currentDay")
+            var cityDivEl = $("#srchCity")
+            var dayIs = moment().format("MMMM Do YYYY");
+            // var dayIs = moment().format("dddd, MMMM Do YYYY");
+            var cityIs = '';
+            var history = 1;
+
+            currentDayEl.text(dayIs);
+
+            $("#srchBtn").on("click", function () {
+                cityIs = document.getElementById("srchCity").value;
+                localStorage.setItem(history, cityIs)
+                queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityIs+"&appid=8522788feb48b4797ad60e7823e7392b"
+                
+                console.log("did I get the city ... " + cityIs)
+
+                $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                console.log(response.name);
+                var weatherDiv = $("test")
+
+                console.log(" the city name is " + response.name);
+                $("#city1").text(response.name + " 1")
+                $("#city2").text(response.name + " 2")
+                $("#city").text(response.name +" "+ dayIs)
+            });
+            })
+
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                console.log(response.name);
+                var weatherDiv = $("test")
+
+                console.log(" the city name is " + response.name);
+                $("#city1").text(response.name + " 1")
+                $("#city2").text(response.name + " 2")
+                $("#city3").text(response.name + " 3")
+                $("#city4").text(response.name + " 4")
+                $("#city5").text(response.name + " 5")
+            });
+
+        })
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    |
+</body>
+
+</html>
